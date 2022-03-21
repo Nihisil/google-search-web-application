@@ -9,13 +9,13 @@ module Google
 
     def parse
       {
-        total_links: total_links,
+        total_links_count: total_links_count,
         total_search_results: total_search_results,
         total_ads_count: total_ads_count
       }
     end
 
-    def total_links
+    def total_links_count
       @document.css('a').count
     end
 

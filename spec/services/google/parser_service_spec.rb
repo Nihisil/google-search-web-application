@@ -6,7 +6,7 @@ RSpec.describe Google::ParserService, type: :service do
   describe 'parse html' do
     it 'counts total links number', vcr: 'services/google/buy_car' do
       html = Google::SearchService.new.do_search(keyword: 'buy car')
-      expect(described_class.new(html: html).total_links).to eq(86)
+      expect(described_class.new(html: html).total_links_count).to eq(86)
     end
 
     it 'counts total search results', vcr: 'services/google/buy_car' do
