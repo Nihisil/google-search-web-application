@@ -1,7 +1,21 @@
-<header>
+<header class="mb-3">
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <%= link_to "Home", "/", class: "navbar-brand" %>
+      <% if user_signed_in? %>
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= current_user.email %>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </li>
+        </ul>
+      </div>
+      <% else %>
+        <li><%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-primary" %></li>
+      <% end %>
     </div>
   </nav>
 </header>

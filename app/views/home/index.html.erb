@@ -1,9 +1,11 @@
 <div class="p-5 mb-4 mt-3 bg-light rounded-3">
-  <div class="container-fluid py-5">
+  <div class="container-fluid py-3">
     <h1 class="display-5 fw-bold">Google Search App</h1>
     <p class="col-md-8 fs-4">
       Using this application you can scrape google search results for a provided list of keywords.
     </p>
-    <button class="btn btn-primary btn-lg" type="button">Sign In</button>
+    <% unless user_signed_in? %>
+      <%=  link_to "Sign up to proceed", new_user_registration_path, class: "btn btn-primary btn-lg"  %>
+    <% end %>
   </div>
 </div>
