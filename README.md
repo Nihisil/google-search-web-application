@@ -2,7 +2,7 @@
 
 Application to scrape google search results for a provided list of keywords.
 
-### Development commands
+## Development commands
 
 Start Docker instances of PostgreSQL and Redis:
 ```shell
@@ -34,7 +34,7 @@ Format all Ruby code:
 rubocop -a
 ```
 
-### Run tests
+## Run tests
 
 Start Docker test instances of PostgreSQL and Redis:
 ```shell
