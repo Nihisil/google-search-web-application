@@ -28,3 +28,20 @@ Stop database container:
 ```shell
 sh bin/envstop.sh
 ```
+
+Format all Ruby code:
+```shell
+rubocop -a
+```
+
+### Run tests
+
+Start Docker test instances of PostgreSQL and Redis:
+```shell
+sh bin/envtestsetup.sh
+```
+
+Run all tests:
+```shell
+rspec
+```
