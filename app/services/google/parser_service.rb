@@ -2,7 +2,7 @@
 
 module Google
   class ParserService
-    def initialize(html:)
+    def initialize(html)
       @html = html
       @document = Nokogiri::HTML.parse(html)
     end
@@ -20,7 +20,7 @@ module Google
     end
 
     def total_search_results
-      strip_string(input: @document.css('div#result-stats').text)
+      strip_string @document.css('div#result-stats').text
     end
 
     def total_ads_count
@@ -29,7 +29,7 @@ module Google
 
     private
 
-    def strip_string(input:)
+    def strip_string(input)
       nil unless input
       # remove non break spaces and strip string
       input.delete(' ').strip
