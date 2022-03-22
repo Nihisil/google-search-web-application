@@ -30,4 +30,4 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  uploaded_keywords: "Keywords were saved. The processing started, please refresh this page in a few minutes."

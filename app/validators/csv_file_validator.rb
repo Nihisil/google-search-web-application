@@ -22,7 +22,7 @@ class CsvFileValidator < ActiveModel::Validator
     end
 
     unless valid_csv_file_type?
-      form.errors.add(:base, 'File should be CSV')
+      form.errors.add(:base, 'Uploaded file should be valid CSV')
       return
     end
 

@@ -14,24 +14,28 @@ class CsvKeywordsForm
     @file = file
 
     return false unless valid?
-
-    begin
-      Keyword.transaction do
-        # rubocop:disable Rails/SkipsModelValidations
-        @keyword_ids = user.keywords.insert_all(processed_keywords).map { |keyword_hash| keyword_hash['id'] }
-        # rubocop:enable Rails/SkipsModelValidations
-      end
-    rescue ActiveRecord::StatementInvalid, ArgumentError
-      errors.add(:base, 'One or more keywords are invalid')
-    end
-
+    save_keywords
     errors.empty?
   end
 
   private
 
+  def save_keywords
+    Keyword.transaction do
+      # rubocop:disable Rails/SkipsModelValidations
+      user.keywords.destroy_all
+      @keyword_ids = user.keywords.insert_all(processed_keywords).map { |result| result['id'] }
+      # rubocop:enable Rails/SkipsModelValidations
+    end
+  rescue ActiveRecord::StatementInvalid, ArgumentError
+    errors.add(:base, 'One or more keywords are invalid')
+  end
+
   def processed_keywords
-    CSV.read(file.tempfile).filter_map do |keyword|
+    CSV.read(file.tempfile).filter_map do |row|
+      return nil if row.empty?
+
+      keyword = row[0]
       return nil if keyword.blank?
 
       {

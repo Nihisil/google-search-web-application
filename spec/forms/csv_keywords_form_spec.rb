@@ -21,7 +21,7 @@ RSpec.describe CsvKeywordsForm, type: :form do
 
     it 'validates that only csv file can be uploaded' do
       form = save_form_with_csv_file('non_csv.txt')
-      expect(form.errors.full_messages.first).to eq 'File should be CSV'
+      expect(form.errors.full_messages.first).to eq 'Uploaded file should be valid CSV'
     end
 
     it 'validates that valid keywords can be used' do
