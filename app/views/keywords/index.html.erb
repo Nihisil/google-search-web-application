@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Keywords</li>
+  </ol>
+</nav>
+
 <h4>Upload CSV file with keywords</h4>
 
 <%= form_with url: keywords_path, :html => {class: "row pt-2"} do |f| %>
@@ -24,9 +30,11 @@
       <% keywords.each_with_index do |keyword, index| %>
         <tr>
           <th scope="row"><%= index + 1 %></th>
-          <td><%= truncate(keyword.keyword, length: 50) %></td>
+          <td>
+            <%= link_to truncate(keyword.keyword, length: 50), keyword_path(keyword.id) %>
+          </td>
           <td><%= keyword.status %></td>
-          <td><%= keyword.updated_at %></td>
+          <td><%= keyword.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
         </tr>
       <% end %>
       </tbody>

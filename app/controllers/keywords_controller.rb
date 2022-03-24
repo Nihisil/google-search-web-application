@@ -7,6 +7,13 @@ class KeywordsController < ApplicationController
     }
   end
 
+  def show
+    keyword = current_user.keywords.find_by(id: params[:id])
+    render locals: {
+      keyword: keyword
+    }
+  end
+
   def create
     if save_keywords_from_file
       StartSearchKeywordsJob.perform_later(csv_form.keyword_ids)

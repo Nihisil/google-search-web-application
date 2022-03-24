@@ -1,0 +1,33 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%=  link_to "Keywords", keywords_path  %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Keyword details</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <div class="card-header text-center">
+    <h2><%= keyword.keyword %></h2>
+  </div>
+  <div class="card-body">
+    <dl class="row">
+      <dt class="offset-sm-4 col-2">Status</dt>
+      <dd class="col-4"><%= keyword.status %></dd>
+      <dt class="offset-sm-4 col-2">Total links</dt>
+      <dd class="col-4"><%= keyword.total_links_count %></dd>
+      <dt class="offset-sm-4 col-2">Total advertising</dt>
+      <dd class="col-4"><%= keyword.total_ads_count %></dd>
+      <dt class="offset-sm-4 col-2">Search results</dt>
+      <dd class="col-4"><%= keyword.total_search_results %></dd>
+    </dl>
+    <p>HTML</p>
+    <textarea class="form-control" rows="6" disabled>
+      <%= keyword.html %>
+    </textarea>
+  </div>
+  <div class="card-footer text-muted text-center">
+    <%= keyword.updated_at.strftime("%Y-%m-%d %H:%M") %>
+  </div>
+</div>
