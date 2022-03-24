@@ -9,6 +9,7 @@ class KeywordsController < ApplicationController
 
   def create
     if save_keywords_from_file
+      StartSearchKeywordsJob.perform_later(csv_form.keyword_ids)
       flash[:notice] = I18n.t('uploaded_keywords')
     else
       flash[:alert] = csv_form.errors.full_messages.first

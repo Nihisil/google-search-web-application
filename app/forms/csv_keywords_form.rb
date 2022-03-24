@@ -14,6 +14,7 @@ class CsvKeywordsForm
     @file = file
 
     return false unless valid?
+
     save_keywords
     errors.empty?
   end

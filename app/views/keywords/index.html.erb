@@ -9,25 +9,28 @@
   </div>
 <% end %>
 
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Keyword</th>
-      <th scope="col">Status</th>
-      <th scope="col">Updated</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% keywords.each_with_index do |keyword, index| %>
+<% unless keywords.empty? %>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
       <tr>
-        <th scope="row"><%= index + 1 %></th>
-        <td><%= truncate(keyword.keyword, length: 50) %></td>
-        <td><%= keyword.status %></td>
-        <td><%= keyword.updated_at %></td>
+        <th scope="col">#</th>
+        <th scope="col">Keyword</th>
+        <th scope="col">Status</th>
+        <th scope="col">Updated</th>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+      <% keywords.each_with_index do |keyword, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= truncate(keyword.keyword, length: 50) %></td>
+          <td><%= keyword.status %></td>
+          <td><%= keyword.updated_at %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
