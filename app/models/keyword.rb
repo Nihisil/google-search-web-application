@@ -5,6 +5,9 @@ class Keyword < ApplicationRecord
   validates :keyword, presence: true, length: { maximum: 100 }
   enum status: { in_progress: 0, processed: 1, failed: 2 }
 
+  scope :search, ->(query) { where('"keywords"."keyword" LIKE ?', "%#{sanitize_sql_like(query)}%") }
+  default_scope { order(created_at: :desc) }
+
   def update_status(status)
     update(status: status)
   end

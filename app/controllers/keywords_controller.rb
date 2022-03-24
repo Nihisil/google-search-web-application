@@ -2,8 +2,12 @@
 
 class KeywordsController < ApplicationController
   def index
+    query = params[:keyword]
+    keywords = current_user.keywords
+    keywords = keywords.search(query) if query
     render locals: {
-      keywords: current_user.keywords
+      keywords: keywords,
+      query: query
     }
   end
 
