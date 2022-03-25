@@ -7,13 +7,15 @@ module Google
       @document = Nokogiri::HTML.parse(html)
     end
 
-    def parse
+    def call
       {
         total_links_count: total_links_count,
         total_search_results: total_search_results,
         total_ads_count: total_ads_count
       }
     end
+
+    private
 
     def total_links_count
       @document.css('a').count
@@ -26,8 +28,6 @@ module Google
     def total_ads_count
       @document.css('div[data-text-ad]').count
     end
-
-    private
 
     def strip_string(input)
       nil unless input
