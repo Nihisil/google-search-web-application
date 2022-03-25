@@ -6,10 +6,14 @@ module Google
     USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '\
                  '(KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 
-    def do_search(keyword)
+    def initialize(keyword)
+      @keyword = keyword
+    end
+
+    def call
       result = HTTParty.get(
         GOOGLE_SEARCH_URL,
-        query: { q: CGI.escape(keyword), hl: 'en' },
+        query: { q: CGI.escape(@keyword), hl: 'en' },
         headers: { 'User-Agent' => USER_AGENT }
       )
       nil if result.response.code != '200'

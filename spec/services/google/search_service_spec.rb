@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Google::SearchService, type: :service do
-  describe '#do_search' do
+  describe '#call' do
     it 'returns http response', vcr: 'services/google/buy_car' do
-      result = described_class.new.do_search 'buy car'
+      result = described_class.new('buy car').call
       expect(result).to be_an_instance_of(HTTParty::Response)
     end
   end

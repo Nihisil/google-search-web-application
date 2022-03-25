@@ -6,10 +6,10 @@ class DoSearchByKeywordJob < ApplicationJob
   def perform(keyword_id)
     keyword = Keyword.find(keyword_id)
     begin
-      html = Google::SearchService.new.do_search keyword.keyword
+      html = Google::SearchService.new(keyword.keyword).call
       return keyword.update_status(:failed) unless html
 
-      save_parsing_results(keyword, html, Google::ParserService.new(html).parse)
+      save_parsing_results(keyword, html, Google::ParserService.new(html).call)
     rescue StandardError
       keyword.update_status(:failed)
     end
