@@ -24,7 +24,6 @@ class CsvKeywordsForm
   def save_keywords
     Keyword.transaction do
       # rubocop:disable Rails/SkipsModelValidations
-      user.keywords.destroy_all
       @keyword_ids = user.keywords.insert_all(processed_keywords).map { |result| result['id'] }
       # rubocop:enable Rails/SkipsModelValidations
     end
