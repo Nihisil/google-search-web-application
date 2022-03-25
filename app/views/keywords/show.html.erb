@@ -15,17 +15,27 @@
     <dl class="row">
       <dt class="offset-sm-4 col-lg-2">Status</dt>
       <dd class="col-lg-4"><%= keyword.status %></dd>
-      <dt class="offset-sm-4 col-lg-2">Total links</dt>
-      <dd class="col-lg-4"><%= keyword.total_links_count %></dd>
-      <dt class="offset-sm-4 col-lg-2">Total advertising</dt>
-      <dd class="col-lg-4"><%= keyword.total_ads_count %></dd>
-      <dt class="offset-sm-4 col-lg-2">Search results</dt>
-      <dd class="col-lg-4"><%= keyword.total_search_results %></dd>
+      <% if keyword.processed? %>
+        <dt class="offset-sm-4 col-lg-2">Total links</dt>
+        <dd class="col-lg-4"><%= keyword.total_links_count %></dd>
+        <dt class="offset-sm-4 col-lg-2">Total advertising</dt>
+        <dd class="col-lg-4"><%= keyword.total_ads_count %></dd>
+        <dt class="offset-sm-4 col-lg-2">Search results</dt>
+        <dd class="col-lg-4"><%= keyword.total_search_results %></dd>
+      <% end %>
     </dl>
-    <p>HTML</p>
-    <textarea class="form-control" rows="6" disabled>
-      <%= keyword.html %>
-    </textarea>
+    <% if keyword.processed? %>
+      <p>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHTML" aria-expanded="false" aria-controls="collapseHTML">
+          Click to see rendered HTML
+        </button>
+      </p>
+      <div>
+        <div class="collapse collapse-horizontal" id="collapseHTML">
+          <iframe srcdoc="<%= keyword.html %>" title="Search results" height="600px" width="100%"></iframe>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="card-footer text-muted text-center">
     <%= keyword.updated_at.strftime("%Y-%m-%d %H:%M") %>
