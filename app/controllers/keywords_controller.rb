@@ -2,7 +2,7 @@
 
 class KeywordsController < ApplicationController
   def index
-    query = params[:keyword]
+    query = index_page_params[:keyword]
     keywords = current_user.keywords
     keywords = keywords.search(query) if query
     render locals: {
@@ -29,6 +29,10 @@ class KeywordsController < ApplicationController
   end
 
   private
+
+  def index_page_params
+    params.permit(:keyword)
+  end
 
   def save_keywords_from_file
     csv_form.save(params[:file])
